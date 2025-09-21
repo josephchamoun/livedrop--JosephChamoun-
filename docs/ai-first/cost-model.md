@@ -1,47 +1,44 @@
-# Cost Model – ShopLite
+# Cost Model – ShopLite AI Touchpoints
+
+---
 
 ## Assumptions
-- Model: GPT-4o-mini at $0.15/1K prompt tokens, $0.60/1K completion tokens
-- Support Assistant:
-  - Avg tokens in: 300
-  - Avg tokens out: 150
-  - Requests/day: 1,000
-  - Cache hit rate: 30%
-- Typeahead Search:
-  - Avg tokens in: 50
-  - Avg tokens out: 20
-  - Requests/day: 50,000
-  - Cache hit rate: 70%
+- Model: Llama 3.1 8B Instruct via OpenRouter  
+- Price: $0.05 / 1K prompt tokens, $0.20 / 1K completion tokens  
+- Support Assistant: Avg in = 300 tokens, Avg out = 100 tokens  
+- Smart Recommender: Avg in = 500 tokens, Avg out = 150 tokens  
+- Requests/day: Support = 1,000 (30% cache), Recommender = 2,000 (50% cache)
 
 ---
 
 ## Calculation
 
+**Formula:**  
+Cost/action = (tokens_in ÷ 1000 × prompt_price) + (tokens_out ÷ 1000 × completion_price)  
+Daily cost = Cost/action × Requests/day × (1 – cache_hit_rate)
+
 ### Support Assistant
-Cost/action = (300/1000 × 0.15) + (150/1000 × 0.60)  
-= 0.045 + 0.09 = **$0.135**
+- Cost/action = (300/1000 × 0.05) + (100/1000 × 0.20)  
+= $0.015 + $0.020 = **$0.035**  
+- Daily = 0.035 × 1000 × (1 – 0.3)  
+= **$24.50/day** (~$735/month)
 
-Daily cost = $0.135 × 1,000 × (1 – 0.30)  
-= $0.135 × 700  
-= **$94.50/day**
-
-### Typeahead Search
-Cost/action = (50/1000 × 0.15) + (20/1000 × 0.60)  
-= 0.0075 + 0.012 = **$0.0195**
-
-Daily cost = $0.0195 × 50,000 × (1 – 0.70)  
-= $0.0195 × 15,000  
-= **$292.50/day**
+### Smart Product Recommender
+- Cost/action = (500/1000 × 0.05) + (150/1000 × 0.20)  
+= $0.025 + $0.030 = **$0.055**  
+- Daily = 0.055 × 2000 × (1 – 0.5)  
+= **$55/day** (~$1650/month)
 
 ---
 
 ## Results
-- Support assistant: Cost/action = **$0.135**, Daily ≈ **$94.50**
-- Typeahead search: Cost/action = **$0.0195**, Daily ≈ **$292.50**
+- Support Assistant: $0.035/action, ~$735/month  
+- Smart Recommender: $0.055/action, ~$1650/month  
+- **Total ≈ $2,385/month**
 
 ---
 
-## Cost lever if over budget
-- Support assistant: shorten context (reduce from 300 → 200 tokens avg).  
-- Typeahead: downgrade to cheaper Llama 3.1 8B Instruct ($0.05/$0.20), or use embedding-based autocomplete for high-volume paths and reserve AI reranker for cache misses only.
-
+## Cost levers if over budget
+- Reduce context size (shorter FAQ snippets, limit product features).  
+- Switch to cheaper tier model for low-risk queries.  
+- Aggressively cache popular FAQ responses and top product recommendations.  

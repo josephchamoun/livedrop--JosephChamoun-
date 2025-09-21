@@ -4,8 +4,8 @@
 |---|---|---|---|---:|---:|---|:---:|
 | Support Assistant (FAQ + order status) | Get instant answers about policies, shipping, returns, or check order status | FAQ markdown, order-status API | 2 | 1200 | ~$0.002 | Default FAQ page | ✅ |
 | Smart Product Recommender | Show “You may also like” items based on browsing or past orders | Product catalog, browsing history, order history | 3 | 1500 | ~$0.003 | Default “Popular Products” list | ✅ |
-| AI-powered Typeahead Search | Suggest products as users type in the search bar | Product catalog, search logs | 3 | 300 | ~$0.001 | ElasticSearch autocomplete | |
-| Dynamic Promo Copy | Generate personalized promotional banners or offers | Product tags, user segment | 4 | 2000 | ~$0.004 | Static promo banners | |
+| Customer Sentiment Analyzer | Detect frustrated or happy customers from messages | Chat logs | 4 | 1600 | ~$0.0025 | Manual escalation | ❌ |
+| Delivery ETA Predictor | Give better shipping time estimates | Order + courier API data | 4 | — | — | Default courier estimate | ❌ |
 
 ---
 

@@ -1,114 +1,110 @@
-# Touchpoint Specs – ShopLite
-
-## 1. Support Assistant (FAQ + order status)
-
-### Problem statement
-Customers frequently ask repetitive questions (shipping times, return policy, order status). Human agents spend significant time on these queries, increasing support costs and slowing response times. An AI support assistant can instantly resolve ~70% of these queries, escalating only complex or account-specific issues.
-
-### Happy path
-1. User opens support chat or help center.
-2. Enters a question (e.g., “Where is my order 12345?”).
-3. System checks if query matches FAQ or requires order lookup.
-4. If FAQ → retrieve from FAQ markdown, format concise answer.
-5. If order → call `order-status` API, format shipping/delivery info.
-6. Send query + context to model for answer generation.
-7. Model responds within 1200ms p95.
-8. UI displays AI answer with option “Still need help?”.
-9. If user clicks → escalate to human agent.
-
-### Grounding & guardrails
-- Source of truth: FAQ markdown + order-status API.  
-- Retrieval scope: Only use internal FAQ and order info.  
-- Max context: ≤ 1500 tokens.  
-- Out-of-scope queries: refuse and suggest escalation.
-
-### Human-in-the-loop
-- Trigger: User rates answer “unhelpful” OR query falls outside FAQ/order scope.  
-- UI surface: “Escalate to agent” button.  
-- Reviewer: Tier-1 support agent.  
-- SLA: Response within 24h (chat/email).
-
-### Latency budget
-- Input parsing: 100ms  
-- Retrieval (FAQ or API): 400ms  
-- Model inference: 600ms  
-- Formatting + delivery: 100ms  
-**Total ≤ 1200ms p95**
-
-Cache: 30% FAQ queries cached, reducing retrieval + model latency.
-
-### Error & fallback behavior
-- FAQ not found → show “I couldn’t find that, would you like to chat with an agent?”  
-- API timeout → return generic “We’re checking your order, an agent will follow up.”  
-- Model error → show fallback FAQ search result.
-
-### PII handling
-- Only order ID leaves the app (no full PII).  
-- Redact user names, emails, phone numbers from prompts.  
-- Logs: anonymized, no sensitive PII stored.
-
-### Success metrics
-- Product: % of FAQ/order queries resolved without human escalation.  
-- Product: p95 response time ≤ 1200ms.  
-- Business: Support cost reduction = (# resolved by AI ÷ total queries) × avg cost/agent interaction.
-
-### Feasibility note
-Data (FAQ markdown and order-status API) already exists. Retrieval can be implemented via lightweight RAG. GPT-4o-mini or similar is suitable. Next prototype step: wire up FAQ + order-status retrieval with a simple UI wrapper.
-
+# AI Touchpoints – Specs
 
 ---
 
-## 2. AI Typeahead Search
+## 1. Support Assistant (FAQ + Order Status)
 
-### Problem statement
-Customers often abandon search if results are slow or irrelevant. Static keyword autocomplete misses intent (e.g., “wirelss headph” should suggest “wireless headphones”). An AI-powered typeahead that predicts relevant products can improve discovery and conversion.
+**Problem statement**  
+Customers frequently ask about return policies, shipping timelines, and order status. Current FAQ pages are static, and order lookups require manual navigation. This leads to high support ticket volume and slower resolution times.
 
-### Happy path
-1. User types in search bar (“wirel…”).  
-2. Input captured after each keystroke pause (≥200ms).  
-3. Check cache for popular queries.  
-4. If miss → query AI model with partial text + SKU catalog index.  
-5. Model generates top 5 suggestions.  
-6. Latency target ≤ 300ms p95.  
-7. Display suggestions instantly.  
-8. User clicks suggestion → normal product search results load.  
-9. Conversion funnel continues as usual.
+**Happy path**  
+1. User opens chat or help widget.  
+2. Enters a query like “Where is my order?” or “What’s your return policy?”  
+3. System classifies intent (FAQ vs. order status).  
+4. If FAQ: retrieve relevant markdown section.  
+5. If order: call `order-status` API using order ID provided.  
+6. Pass structured context + query to model.  
+7. Model generates concise answer.  
+8. Answer is shown in chat UI with citations (FAQ link or order number).  
+9. If confidence < threshold → escalate to human.  
+10. User receives resolution within latency budget.
 
-### Grounding & guardrails
-- Source of truth: Product catalog (10k SKUs).  
-- Retrieval scope: Only surface SKUs that exist.  
-- Max context: ≤ 500 tokens (product names + categories).  
-- Out-of-scope: return keyword match fallback.
+**Grounding & guardrails**  
+- Source of truth: FAQ markdown, order-status API  
+- Retrieval scope: strictly scoped to FAQ + order API responses  
+- Max context: 1.5k tokens  
+- Refusal policy: reject questions outside of scope (e.g., “What’s the weather?”)
 
-### Human-in-the-loop
-- Trigger: Low CTR (<1% on a suggestion over 1k impressions).  
-- UI surface: Admin dashboard with flagged terms.  
-- Reviewer: Merchandising manager.  
-- SLA: Weekly review of flagged search terms.
+**Human-in-the-loop**  
+- Escalation if confidence < 0.75 or if API fails  
+- UI: “Contact support” button in chat widget  
+- Reviewer: human agent in helpdesk tool  
+- SLA: respond within 2 hours
 
-### Latency budget
-- Keystroke capture/debounce: 50ms  
-- Cache lookup: 20ms  
-- Model inference: 200ms  
-- Response formatting: 30ms  
-**Total ≤ 300ms p95**
+**Latency budget (≤1200 ms)**  
+- Query classification: 100 ms  
+- FAQ/API retrieval: 300 ms  
+- Model inference: 600 ms  
+- UI render: 200 ms  
+- Cache: 30% FAQ hits served instantly (~100 ms)
 
-Cache: 70% hit rate for common queries.
+**Error & fallback behavior**  
+- API failure → fallback to human agent  
+- Model timeout → return FAQ link or default “contact support” message
 
-### Error & fallback behavior
-- Model error or timeout → revert to keyword autocomplete.  
-- If no results → show “No products found” with spelling suggestion.
+**PII handling**  
+- Only order ID leaves the app, redacted logs  
+- No storage of user free-text queries beyond 7 days  
+- Audit logs scrubbed of personal details
 
-### PII handling
-- No PII in requests (search terms only).  
-- Logs may store query text for analytics, stripped of session IDs.  
-- No sensitive data leaves app.
+**Success metrics**  
+- Product: % FAQ deflected = (FAQ queries answered / total FAQ queries) × 100  
+- Product: Avg response latency ≤ 1200 ms at p95  
+- Business: Support contact reduction = (tickets pre-AI – tickets post-AI) ÷ tickets pre-AI × 100
 
-### Success metrics
-- Product: CTR on search suggestions.  
-- Product: Search-to-cart conversion rate uplift.  
-- Business: Revenue lift = (conversion uplift × avg order value × search traffic).
+**Feasibility note**  
+FAQ markdown and order API already exist. Retrieval + classification can be done with a lightweight pipeline. Prototype can use OpenRouter or GPT-4o-mini for quick feasibility. Next step: implement small FAQ probe with cached embeddings.
 
-### Feasibility note
-Product catalog index is available. Approximate nearest-neighbor search can be combined with lightweight AI re-ranking. GPT-4o-mini or smaller models are sufficient. Next prototype step: implement hybrid cache + keyword fallback + AI reranker.
+---
 
+## 2. Smart Product Recommender
+
+**Problem statement**  
+Shoppers often leave without exploring more products. Current recommendations are static (bestsellers), not tailored to user activity. This reduces cross-sell and upsell opportunities.
+
+**Happy path**  
+1. User views a product page.  
+2. System logs browsing and purchase history.  
+3. When rendering the page, a recommendation request is made.  
+4. Context = viewed product, recent browsing, past orders.  
+5. Model ranks candidate products by similarity & relevance.  
+6. Top 3–5 recommendations returned.  
+7. Shown under “You may also like” section.  
+8. User clicks on a recommended product.  
+9. Metrics logged (CTR, conversion).  
+10. Cache frequently served recommendations for popular products.
+
+**Grounding & guardrails**  
+- Source of truth: product catalog, purchase history, browsing history  
+- Scope: only products in catalog (no hallucinations)  
+- Max context: 2k tokens (product embeddings)  
+- Refusal: if no data available, fallback to “Popular Products”
+
+**Human-in-the-loop**  
+- Escalation: if click-through rate < 5% for a product set → flagged for merchandiser review  
+- UI: analytics dashboard for merch team  
+- SLA: review flagged products within 7 days
+
+**Latency budget (≤1500 ms)**  
+- Context prep: 400 ms  
+- Candidate retrieval: 500 ms  
+- Model ranking: 400 ms  
+- UI render: 200 ms  
+- Cache: top product combos cached (70% hit)
+
+**Error & fallback behavior**  
+- API or model failure → fallback to static bestseller list  
+- Timeout → default “Popular Products” shown instantly
+
+**PII handling**  
+- Only anonymized browsing/purchase history sent to model  
+- Strip user IDs before logging  
+- Logs retained max 30 days
+
+**Success metrics**  
+- Product: CTR on recommended products = clicks ÷ impressions × 100  
+- Product: Conversion uplift = (purchases via recs ÷ total purchases) × 100  
+- Business: Average order value (AOV) uplift = (AOV with recs – baseline AOV) ÷ baseline AOV × 100
+
+**Feasibility note**  
+Catalog and order history already exist in DB. Embeddings can be pre-computed for products. A small-scale recommender can be prototyped with OpenRouter LLaMA 3.1 8B or vector search. Next step: build proof-of-concept with a sample of 1k products.

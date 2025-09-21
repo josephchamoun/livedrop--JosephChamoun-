@@ -2,17 +2,12 @@
 
 | Capability | Intent (user) | Inputs (this sprint) | Risk 1–5 (tag) | p95 ms | Est. cost/action | Fallback | Selected |
 |---|---|---|---|---:|---:|---|:---:|
-| Support Assistant (FAQ + order status) | Get instant answers about policies, shipping, returns, or check order status | FAQ markdown, `order-status` API | 2 | 1200 | $0.002 | FAQ search + escalate to human | ✅ |
-| AI Typeahead Search | Find products faster with smart autocomplete | Product catalog (10k SKUs) | 3 | 300 | $0.0005 | Keyword match fallback | ✅ |
-| Personalized Recommendations | See products tailored to my browsing/purchase history | SKU catalog + session history | 4 | 600 | $0.01 | Generic popular items list | ❌ |
-| Review Summarization | Quickly skim “what customers say” about a product | Product reviews (structured text) | 3 | 800 | $0.003 | Show raw reviews | ❌ |
-| AI-powered Product Description Generator | Auto-generate engaging descriptions for new SKUs | Catalog attributes (name, category, specs) | 5 | N/A (offline batch) | $0.02 | Human copywriter review | ❌ |
+| Support Assistant (FAQ + order status) | Get instant answers about policies, shipping, returns, or check order status | FAQ markdown, order-status API | 2 | 1200 | ~$0.002 | Default FAQ page | ✅ |
+| Smart Product Recommender | Show “You may also like” items based on browsing or past orders | Product catalog, browsing history, order history | 3 | 1500 | ~$0.003 | Default “Popular Products” list | ✅ |
+| AI-powered Typeahead Search | Suggest products as users type in the search bar | Product catalog, search logs | 3 | 300 | ~$0.001 | ElasticSearch autocomplete | |
+| Dynamic Promo Copy | Generate personalized promotional banners or offers | Product tags, user segment | 4 | 2000 | ~$0.004 | Static promo banners | |
 
 ---
 
 ### Why these two
-We selected **Support Assistant** and **AI Typeahead Search** because they directly improve core KPIs with low integration risk.  
-- The support assistant can reduce contact rate by answering ~70% of FAQ/order queries instantly, cutting operational costs.  
-- The AI-powered typeahead improves product discovery, directly driving conversion by surfacing relevant products within the 300ms target.  
-Both use data we already have (FAQs, order API, product catalog), making them feasible within one sprint.
-
+We selected **Support Assistant** and **Smart Product Recommender** because they directly impact **conversion rate** and **support deflection**—two key business KPIs. The assistant reduces repetitive support contacts by handling FAQ and order tracking instantly, while the recommender increases basket size by surfacing relevant products. Both have **low integration risk** (data/APIs already exist) and measurable ROI within the current sprint scope.

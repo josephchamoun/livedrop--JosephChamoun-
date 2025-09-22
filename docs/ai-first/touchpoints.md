@@ -149,7 +149,7 @@ Error & fallback behavior
 
 PII handling
 
- -Only anonymized browsing/purchase history sent to model
+- Only anonymized browsing/purchase history sent to model
 
 - Strip user IDs before logging
 

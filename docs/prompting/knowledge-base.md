@@ -1,59 +1,195 @@
-Document 1: User Registration and Account Management
+## Document 1: Shoplite User Registration and Account Management
 
-To create a Shoplite account, users must visit the registration page and provide a valid email address, password, and basic profile information. Upon registration, an email verification is sent, which must be completed within 24 hours to activate the account. Users can choose between buyer accounts and seller accounts; seller accounts require additional business verification and tax information. Account management features include updating personal information, changing passwords, setting security questions, and managing notification preferences. Users can also deactivate their accounts, but this process will require confirmation via email and may impact any active orders or subscriptions. Buyer accounts allow access to product browsing, purchasing, order tracking, and reviews. Seller accounts provide access to the seller dashboard, inventory management, order processing, and analytics. Security measures such as two-factor authentication are recommended to ensure account protection. Additionally, Shoplite offers a password recovery system that uses a combination of email and phone verification to help users regain access securely. Overall, account management is designed to be intuitive and secure, providing both buyers and sellers with complete control over their profiles and activities on the platform.
+To create a Shoplite account, users must visit the registration page and provide a valid email address, password, and basic profile information. Email verification is required within 24 hours. Users can choose between:
 
-Document 2: Product Search and Filtering Features
+- **Buyer accounts** (free)
+- **Seller accounts** (requires business verification and tax information)
 
-Shoplite provides a powerful search engine that allows users to find products quickly and efficiently. The search bar supports keyword queries, category selection, and brand filters. Users can filter results by price range, rating, availability, and seller location. Advanced filters include shipping speed, promotional offers, and eco-friendly options. Search results are ranked using a combination of relevance, popularity, and personalized recommendations based on user browsing history and purchase behavior. Shoplite also offers autocomplete suggestions and spelling correction to improve search accuracy. Users can save frequent searches or set up alerts for when new products match their criteria. Additionally, faceted navigation allows users to refine results step by step, combining multiple filters to pinpoint exactly what they want. The search system is optimized to handle large catalogs, with real-time indexing and caching to ensure fast response times. Mobile users can access the same search and filtering options, with a responsive interface that adjusts to smaller screens. Overall, the Shoplite search and filtering features are designed to help users quickly discover products while providing an enjoyable browsing experience.
+**Account Management Features:**
+- Update personal information
+- Change passwords
+- Set security questions
+- Manage notification preferences
+- Deactivate accounts (requires email confirmation; may affect active orders/subscriptions)
 
-Document 3: Shopping Cart and Checkout Process
+**Buyer Access:** product browsing, purchasing, order tracking, reviews  
+**Seller Access:** seller dashboard, inventory management, order processing, analytics  
 
-The Shoplite shopping cart allows users to add multiple items from different sellers, review quantities, and apply promotional codes or gift cards. Cart contents are preserved for logged-in users across sessions and can be modified at any time before checkout. The checkout process is designed to be straightforward, guiding users through shipping, payment, and order confirmation steps. Users can select from multiple shipping methods, including standard, expedited, or same-day delivery, depending on their location. Payment options include credit/debit cards, digital wallets, and cash-on-delivery where available. Shoplite implements secure payment gateways that encrypt sensitive information and comply with PCI-DSS standards. Before confirming an order, users can review the total cost, including taxes, shipping, and any discounts applied. Once an order is placed, users receive an order confirmation email with tracking details and estimated delivery times. Sellers are notified automatically about new orders and can update order status through their dashboard. The system ensures that items are not double-booked and stock levels are updated in real-time to prevent overselling. Returns and refunds are integrated into the checkout system, allowing users to initiate a return directly from their order history.
+**Security Measures:** two-factor authentication recommended, password recovery via email and phone verification.
 
-Document 4: Payment Methods and Security
+---
 
-Shoplite supports a wide range of payment methods to accommodate buyer preferences. Accepted methods include major credit and debit cards, PayPal, Apple Pay, Google Pay, and local payment solutions in specific regions. All payment transactions are processed through secure gateways with SSL encryption and are fully compliant with PCI-DSS standards. Shoplite employs advanced fraud detection systems that monitor unusual patterns in transactions, including sudden high-value purchases, multiple declined attempts, or geographically suspicious activity. Users are encouraged to enable two-factor authentication for added security. Sensitive information, such as card numbers, is never stored in plaintext and is encrypted both in transit and at rest. For buyers using digital wallets, Shoplite ensures seamless integration without requiring sensitive data sharing with sellers. Disputes and chargebacks are handled through a structured support process, allowing buyers to raise payment issues within a defined timeframe. Sellers receive funds only after order confirmation and successful processing, reducing the risk of fraudulent transactions. Overall, Shoplite’s payment methods and security protocols are designed to provide users with confidence, flexibility, and safety when making purchases online.
+## Document 2: Shoplite Product Search and Filtering Features
 
-Document 5: Order Tracking and Delivery
+Shoplite provides a powerful search engine:
 
-Shoplite provides detailed order tracking for buyers, allowing them to monitor the status of their purchases in real-time. Once an order is placed, users receive a confirmation email and a unique tracking number. The tracking system provides updates at key stages: order confirmed, processing, shipped, in transit, and delivered. Shipping carriers are integrated into the system to provide estimated delivery times and automatic notifications via email or mobile push notifications. Users can also request changes to delivery, such as rescheduling or redirecting packages, subject to seller approval. For international shipments, customs processing and import duties are displayed clearly in the order summary. Sellers are responsible for updating shipment status and confirming dispatch to ensure accurate tracking information. Shoplite’s logistics algorithms optimize delivery routes, estimate arrival times, and identify potential delays. In cases of lost or delayed packages, the support team assists buyers in resolving the issue through coordination with the seller and carrier. Order tracking provides transparency, helping buyers feel confident about the delivery process and improving overall satisfaction.
+- **Search Capabilities:** keyword queries, category selection, brand filters  
+- **Filtering Options:** price range, rating, availability, seller location, shipping speed, promotions, eco-friendly options  
 
-Document 6: Return and Refund Policies
+**Features:**
+- Autocomplete suggestions
+- Spelling correction
+- Save searches & alerts
+- Faceted navigation for combining multiple filters
+- Optimized for large catalogs with real-time indexing
+- Mobile responsive interface
 
-Shoplite maintains a clear and structured return and refund policy. Buyers can initiate returns within a defined period, typically 30 days from delivery, depending on the product category. Items must be in their original condition, with all packaging and accessories intact. The return process begins by selecting the order in the user account, choosing the item, and specifying a reason for return. Shoplite provides prepaid return labels for eligible products, while in some cases, buyers may be responsible for shipping costs. Once the seller receives the returned item, the refund is processed to the original payment method within 5–7 business days. Digital products or personalized items may have different refund rules. Shoplite’s system automatically updates the order status and notifies the buyer at each stage of the return process. Sellers must adhere to return policies to maintain high ratings and avoid penalties. Additionally, Shoplite offers dispute resolution if the buyer and seller cannot agree on the return, ensuring fairness and transparency. Clear communication and automated workflows make returns and refunds straightforward, maintaining trust between buyers and sellers.
+---
 
-Document 7: Product Reviews and Ratings
+## Document 3: Shoplite Shopping Cart and Checkout Process
 
-Shoplite allows buyers to provide feedback through product reviews and ratings. After receiving an order, users are invited to rate the product on a five-star scale and leave detailed comments about quality, fit, or usability. Reviews are moderated to ensure compliance with community guidelines, preventing spam or abusive language. Sellers can respond to reviews, clarifying information or thanking customers for feedback. The rating system influences product ranking in search results, encouraging high-quality offerings. Verified purchase badges help buyers identify genuine reviews. Shoplite also uses aggregate ratings to provide an overall score for each product and seller. Review analytics are available to sellers through the dashboard, helping them identify trends and areas for improvement. The review system enhances transparency and assists buyers in making informed purchasing decisions, while fostering accountability and quality among sellers.
+- Add multiple items from different sellers  
+- Review quantities, apply promo codes/gift cards  
+- Cart preserved across sessions for logged-in users  
 
-Document 8: Seller Account Setup and Management
+**Checkout Steps:**
+1. Shipping selection (standard, expedited, same-day)  
+2. Payment selection (credit/debit cards, digital wallets, cash-on-delivery)  
+3. Order confirmation  
 
-To become a seller on Shoplite, users must create a seller account, provide business documentation, and complete tax verification. The seller dashboard offers access to inventory management, order processing, and sales analytics. Sellers can list products individually or via bulk upload using CSV files or API integration. Profile customization includes branding, store policies, shipping methods, and return preferences. Sellers receive notifications for new orders, low stock, and customer inquiries. Shoplite provides tools for setting product pricing, promotional discounts, and shipping fees. Account performance metrics, such as fulfillment rate, average rating, and dispute history, are tracked to ensure sellers maintain high standards. Failure to comply with Shoplite policies can result in account suspension. Additionally, sellers can integrate third-party services for accounting, logistics, and marketing, streamlining operations. The system is designed to give sellers full control over their store while ensuring a consistent experience for buyers.
+**Security & Processing:**
+- PCI-DSS compliant payment gateways
+- Real-time stock updates
+- Order confirmation emails with tracking
+- Seller notifications for new orders
+- Integrated returns and refunds system
 
-Document 9: Inventory Management for Sellers
+---
 
-Shoplite offers robust inventory management tools for sellers. Sellers can track stock levels, set reorder thresholds, and update availability in real-time. Low-stock alerts prevent overselling and notify sellers when restocking is required. Inventory can be managed through the dashboard or via API integration for automated updates. Bulk product imports allow large catalogs to be uploaded efficiently. Variants such as size, color, or bundle options are supported. Inventory reports provide insights into sales trends, high-demand products, and seasonal fluctuations. Sellers can also manage warehouses and shipping locations, optimizing logistics for faster delivery. Accurate inventory management ensures buyers have up-to-date availability information, reducing cancellations and enhancing trust.
+## Document 4: Shoplite Payment Methods and Security
 
-Document 10: Commission and Fee Structure
+- **Accepted Payment Methods:** credit/debit cards, PayPal, Apple Pay, Google Pay, local solutions  
+- **Security Measures:** SSL encryption, PCI-DSS compliance, fraud detection, two-factor authentication, sensitive info encrypted in transit and at rest  
+- **Other Features:** digital wallet integration, structured dispute/chargeback process, seller payments after order confirmation  
 
-Shoplite charges sellers a commission fee on each sale, which varies by product category. Additional fees may apply for premium listing placement, promotional campaigns, or special services such as expedited shipping support. Sellers are notified of all fees upfront in the dashboard before confirming product listings. Payments to sellers are made after deducting commissions, typically on a weekly or bi-weekly schedule. Detailed transaction reports are available to track earnings, fees, and refunds. Shoplite also provides guidance on pricing strategies to help sellers maximize profit while remaining competitive. Transparent commission and fee structures encourage trust and long-term engagement from sellers.
+---
 
-Document 11: Customer Support Procedures
+## Document 5: Shoplite Order Tracking and Delivery
 
-Shoplite provides a comprehensive customer support system to assist both buyers and sellers. Users can access support via live chat, email, and phone during business hours, with an AI-powered chatbot available 24/7 for common questions. Support tickets are categorized by issue type—orders, payments, returns, technical problems, or account management—to streamline resolution. Each ticket receives a unique tracking ID, allowing users to monitor progress. Response times vary depending on complexity, but simple inquiries are usually answered within a few hours. The support system integrates with the order management backend, enabling agents to access order details, payment history, and product information quickly. Sellers have a dedicated support channel for issues related to listings, shipping, or account performance. Additionally, Shoplite provides an extensive help center with step-by-step guides, FAQs, and video tutorials. Customer support policies emphasize fast, transparent, and fair resolution, ensuring that both buyers and sellers have confidence in the platform.
+- Real-time tracking with confirmation emails and unique tracking number  
 
-Document 12: Mobile App Features
+**Stages:** confirmed → processing → shipped → in transit → delivered  
 
-The Shoplite mobile app provides a seamless shopping experience on both iOS and Android devices. Users can browse products, apply filters, add items to their cart, and complete purchases directly from their phones. Push notifications alert users to promotions, order updates, and personalized recommendations. The app includes barcode scanning for quick product searches and QR codes for payments. Mobile wallets, fingerprint authentication, and face ID ensure secure login and payment options. Sellers can manage their stores on the go, updating inventory, processing orders, and responding to messages. Offline caching allows users to view previously loaded products and cart contents even without an active internet connection. The app interface is designed for ease of use, with intuitive navigation, responsive design, and accessibility features such as text resizing and screen reader compatibility. Overall, the Shoplite mobile app replicates the full functionality of the web platform while providing the convenience of shopping anywhere, anytime.
+- Delivery modification requests (seller approval required)  
+- International shipments display customs/import duties  
+- Optimized logistics with estimated arrival and delay notifications  
+- Support assistance for lost/delayed packages
 
-Document 13: API Documentation for Developers
+---
 
-Shoplite offers a RESTful API that allows developers to integrate platform features into external applications. The API provides endpoints for retrieving product catalogs, submitting orders, managing user accounts, and querying inventory levels. Authentication is handled via OAuth 2.0 tokens, ensuring secure access. Rate limiting is applied to prevent abuse, with higher limits available for verified partners. Detailed API documentation includes request/response examples, parameter descriptions, error codes, and best practices for efficient integration. Developers can use webhooks to receive real-time notifications of events such as new orders, payment confirmations, and shipment updates. Sandbox environments are provided for testing without affecting live data. Shoplite encourages developers to follow secure coding practices and validate all incoming data. The API is versioned, with backward-compatible changes clearly documented to avoid disruptions. By exposing its platform programmatically, Shoplite enables partners to build custom tools, apps, or analytics systems that enhance both buyer and seller experiences.
+## Document 6: Shoplite Return and Refund Policies
 
-Document 14: Security and Privacy Policies
+- **Return Period:** typically 30 days from delivery  
+- **Process:** select order/item, specify reason, use prepaid label if eligible  
+- **Refunds:** processed in 5–7 business days to original payment method  
+- Digital/personalized items may have exceptions  
+- Automated order status updates  
+- Sellers must comply with policies to maintain ratings  
+- Dispute resolution available  
 
-Shoplite prioritizes user security and privacy, implementing industry-standard measures to protect data. All personal and payment information is encrypted during transit using TLS and at rest using AES-256 encryption. Access to sensitive data is limited to authorized personnel, and regular audits are conducted to detect vulnerabilities. Two-factor authentication and strong password requirements are enforced to reduce account compromise risks. Shoplite complies with global privacy regulations such as GDPR and CCPA, providing users with control over their personal data, including options to download, update, or delete their information. Security monitoring systems detect suspicious activity, including unusual login patterns or payment anomalies. Privacy policies clearly state what data is collected, how it is used, and third-party sharing practices. Users are notified of any policy changes and can manage notification preferences. These measures ensure that buyers and sellers can trust Shoplite with their information while enjoying a secure online shopping environment.
+---
 
-Document 15: Promotional Codes and Discounts
+## Document 7: Shoplite Product Reviews and Ratings
 
-Shoplite allows sellers to create promotional campaigns using discount codes, seasonal sales, and bundle offers. Promotional codes can be percentage-based, fixed-amount, or conditional, such as “buy one get one free.” Sellers can set start and end dates, usage limits, and minimum purchase requirements. Buyers can apply valid promo codes during checkout, with automatic verification of eligibility and calculation of the discount. Shoplite analytics track redemption rates, revenue impact, and customer engagement for each campaign. Notifications can be sent to users to alert them of active promotions. Special events, like holiday sales, can be featured on the platform’s homepage and app interface. Promotional campaigns must comply with Shoplite policies, avoiding misleading claims or abuse. The system is designed to encourage buyer engagement, help sellers drive sales, and maintain a fair marketplace environment.
+- Buyers rate products on a five-star scale and leave comments  
+- Reviews moderated for compliance  
+- Sellers can respond to reviews  
+- Ratings influence search ranking  
+- Verified purchase badges for authenticity  
+- Aggregate ratings provided  
+- Review analytics available for sellers  
+
+---
+
+## Document 8: Shoplite Seller Account Setup and Management
+
+- Create seller account with business documents and tax verification  
+- **Seller Dashboard:** inventory management, order processing, sales analytics  
+- Product listing via individual or bulk upload (CSV/API)  
+- Profile customization: branding, policies, shipping, returns  
+- Notifications: new orders, low stock, inquiries  
+- Pricing, promotions, and shipping fee management  
+- Performance metrics tracked; third-party integrations supported  
+
+---
+
+## Document 9: Shoplite Inventory Management for Sellers
+
+- Track stock levels, reorder thresholds, and availability in real-time  
+- Low-stock alerts  
+- Bulk imports supported  
+- Variants (size, color, bundle) supported  
+- Inventory reports for trends and seasonal demand  
+- Manage warehouses and shipping locations  
+
+---
+
+## Document 10: Shoplite Commission and Fee Structure
+
+- Commission fees per product category  
+- Additional fees: premium listings, promotions, special services  
+- Transparent notifications in dashboard  
+- Payments made after commission deduction (weekly/bi-weekly)  
+- Transaction reports available  
+- Pricing guidance provided  
+
+---
+
+## Document 11: Shoplite Customer Support Procedures
+
+- Support via live chat, email, phone, and AI chatbot (24/7)  
+- Ticket categorization: orders, payments, returns, technical, account management  
+- Unique tracking IDs  
+- Backend integration for order/payment info  
+- Dedicated seller support channel  
+- Help center with guides, FAQs, videos  
+- Fast, transparent, fair resolution  
+
+---
+
+## Document 12: Shoplite Mobile App Features
+
+- iOS & Android support  
+- Browse, filter, add to cart, purchase  
+- Push notifications for promotions/order updates  
+- Barcode scanning and QR code payments  
+- Mobile wallets, fingerprint, Face ID login  
+- Seller management on-the-go  
+- Offline caching for previously loaded content  
+- Intuitive, responsive, accessible interface  
+
+---
+
+## Document 13: Shoplite API Documentation for Developers
+
+- RESTful API endpoints: product catalog, orders, accounts, inventory  
+- OAuth 2.0 authentication  
+- Rate limiting (higher for verified partners)  
+- Detailed docs: request/response, parameters, error codes  
+- Webhooks for real-time events  
+- Sandbox environment for testing  
+- Versioned API with backward-compatible updates  
+
+---
+
+## Document 14: Shoplite Security and Privacy Policies
+
+- **Data Protection:** TLS encryption, AES-256 at rest, authorized access  
+- Two-factor authentication & strong passwords  
+- GDPR & CCPA compliance  
+- Security monitoring for suspicious activity  
+- Clear privacy policies: data collection, usage, third-party sharing  
+- Policy change notifications; user control over data  
+
+---
+
+## Document 15: Shoplite Promotional Codes and Discounts
+
+- Sellers create promotions: discount codes, seasonal sales, bundle offers  
+- Code types: percentage, fixed, conditional  
+- Start/end dates, usage limits, minimum purchase configurable  
+- Automatic verification at checkout  
+- Analytics: redemption, revenue, engagement  
+- User notifications for active promotions  
+- Special events highlighted on homepage/app  
+- Compliance with platform policies

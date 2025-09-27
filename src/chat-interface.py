@@ -4,7 +4,7 @@ import sys
 from datetime import datetime
 
 # === CONFIGURATION ===
-NGROK_URL = "https://<your-ngrok-id>.ngrok-free.app/query"  # replace with your tunnel URL
+NGROK_URL = "https://fe7cf0441b10.ngrok-free.app/query"  # replace with your tunnel URL
 LOG_FILE = "chat_log.txt"
 
 def log_message(role, message):

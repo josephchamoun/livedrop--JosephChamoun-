@@ -15,7 +15,12 @@ def ask_llm(api_url: str, question: str):
     """Send question to the LLM API and return response"""
     try:
         print("[Retrieving context...]")
+        # Try sending with 'question'
         res = requests.post(api_url, json={"question": question}, timeout=30)
+
+        if res.status_code == 400 and "missing query" in res.text.lower():
+            # Retry with 'query' key
+            res = requests.post(api_url, json={"query": question}, timeout=30)
 
         if res.status_code != 200:
             return f"Error: API returned {res.status_code} - {res.text}"
@@ -43,11 +48,15 @@ def ask_llm(api_url: str, question: str):
 
 def main():
     print("=== LLM Chat Interface ===")
-    api_url = input("Enter your LLM API URL (e.g., https://xxxx-5000.ngrok-free.app/chat): ").strip()
-    if not api_url:
+    base_url = input("Enter your LLM API base URL (e.g., https://xxxx-5000.ngrok-free.app): ").strip()
+    if not base_url:
         print("No URL entered. Exiting.")
         return
 
+    base_url = base_url.rstrip("/")
+    api_url = f"{base_url}/chat"
+
+    print(f"Connected to: {api_url}")
     print("Type 'exit' to quit.\n")
 
     while True:

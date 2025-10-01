@@ -38,7 +38,8 @@ def main():
             break
 
         try:
-            payload = {"question": user_input}
+            payload = {"query": user_input}
+
             response = requests.post(chat_url, json=payload, timeout=60)
 
             if response.status_code == 200:

@@ -1,1 +1,163 @@
+[
+  {
+    "id": "p001",
+    "title": "Wireless Mouse",
+    "price": 24.99,
+    "image": "/images/mouse.jpg",
+    "tags": ["electronics", "accessories"],
+    "stockQty": 15
+  },
+  {
+    "id": "p002",
+    "title": "Mechanical Keyboard",
+    "price": 59.99,
+    "image": "/images/keyboard.jpg",
+    "tags": ["electronics", "gaming"],
+    "stockQty": 10
+  },
+  {
+    "id": "p003",
+    "title": "27-inch 4K Monitor",
+    "price": 329.99,
+    "image": "/images/monitor.jpg",
+    "tags": ["electronics", "display"],
+    "stockQty": 6
+  },
+  {
+    "id": "p004",
+    "title": "USB-C Docking Station",
+    "price": 79.99,
+    "image": "/images/dock.jpg",
+    "tags": ["electronics", "office"],
+    "stockQty": 12
+  },
+  {
+    "id": "p005",
+    "title": "Noise Cancelling Headphones",
+    "price": 149.99,
+    "image": "/images/headphones.jpg",
+    "tags": ["electronics", "audio"],
+    "stockQty": 8
+  },
+  {
+    "id": "p006",
+    "title": "Bluetooth Speaker",
+    "price": 39.99,
+    "image": "/images/speaker.jpg",
+    "tags": ["audio", "portable"],
+    "stockQty": 20
+  },
+  {
+    "id": "p007",
+    "title": "Smartwatch Series 6",
+    "price": 249.99,
+    "image": "/images/smartwatch.jpg",
+    "tags": ["wearables", "electronics"],
+    "stockQty": 9
+  },
+  {
+    "id": "p008",
+    "title": "Portable SSD 1TB",
+    "price": 109.99,
+    "image": "/images/ssd.jpg",
+    "tags": ["storage", "electronics"],
+    "stockQty": 18
+  },
+  {
+    "id": "p009",
+    "title": "Laptop Stand Aluminum",
+    "price": 34.99,
+    "image": "/images/laptop-stand.jpg",
+    "tags": ["office", "accessories"],
+    "stockQty": 25
+  },
+  {
+    "id": "p010",
+    "title": "Ergonomic Office Chair",
+    "price": 199.99,
+    "image": "/images/chair.jpg",
+    "tags": ["furniture", "office"],
+    "stockQty": 7
+  },
+  {
+    "id": "p011",
+    "title": "Wireless Charging Pad",
+    "price": 29.99,
+    "image": "/images/charger.jpg",
+    "tags": ["electronics", "charging"],
+    "stockQty": 22
+  },
+  {
+    "id": "p012",
+    "title": "Smart Home Plug (2-Pack)",
+    "price": 24.99,
+    "image": "/images/smartplug.jpg",
+    "tags": ["home", "smart"],
+    "stockQty": 16
+  },
+  {
+    "id": "p013",
+    "title": "LED Desk Lamp",
+    "price": 44.99,
+    "image": "/images/lamp.jpg",
+    "tags": ["home", "lighting"],
+    "stockQty": 14
+  },
+  {
+    "id": "p014",
+    "title": "Wireless Earbuds",
+    "price": 89.99,
+    "image": "/images/earbuds.jpg",
+    "tags": ["audio", "portable"],
+    "stockQty": 19
+  },
+  {
+    "id": "p015",
+    "title": "1080p Webcam",
+    "price": 49.99,
+    "image": "/images/webcam.jpg",
+    "tags": ["electronics", "office"],
+    "stockQty": 11
+  },
+  {
+    "id": "p016",
+    "title": "Smart LED Light Bulb (4-Pack)",
+    "price": 59.99,
+    "image": "/images/lightbulb.jpg",
+    "tags": ["lighting", "smart"],
+    "stockQty": 17
+  },
+  {
+    "id": "p017",
+    "title": "Graphic Tablet 10\"",
+    "price": 129.99,
+    "image": "/images/tablet.jpg",
+    "tags": ["art", "electronics"],
+    "stockQty": 5
+  },
+  {
+    "id": "p018",
+    "title": "Gaming Headset",
+    "price": 69.99,
+    "image": "/images/gaming-headset.jpg",
+    "tags": ["gaming", "audio"],
+    "stockQty": 13
+  },
+  {
+    "id": "p019",
+    "title": "Smartphone Tripod",
+    "price": 27.99,
+    "image": "/images/tripod.jpg",
+    "tags": ["photography", "accessories"],
+    "stockQty": 21
+  },
+  {
+    "id": "p020",
+    "title": "Fitness Tracker Band",
+    "price": 59.99,
+    "image": "/images/fitness-band.jpg",
+    "tags": ["wearables", "fitness"],
+    "stockQty": 15
+  }
+]
 

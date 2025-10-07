@@ -1,1 +1,124 @@
 
+[
+  {
+    "qid": "Q01",
+    "category": "Seller Account",
+    "question": "How do I create a seller account on Shoplite?",
+    "answer": "To create a seller account, visit the Shoplite seller registration page, provide business information including tax ID, and complete the verification process which takes 2-3 business days."
+  },
+  {
+    "qid": "Q02",
+    "category": "Returns & Orders",
+    "question": "What are Shoplite's return policies and how do I track my order status?",
+    "answer": "Shoplite allows returns within a 30-day window for most products, requiring a return authorization code. Orders can be tracked via the user account or mobile app, showing current shipping status and estimated delivery dates."
+  },
+  {
+    "qid": "Q03",
+    "category": "Promotions",
+    "question": "How can a buyer apply a promotional code during checkout?",
+    "answer": "Buyers can enter valid promotional codes at checkout. Discounts are automatically applied if eligibility criteria such as minimum purchase or usage limits are met."
+  },
+  {
+    "qid": "Q04",
+    "category": "Payment & Security",
+    "question": "What payment methods are available and how is security ensured?",
+    "answer": "Shoplite supports credit/debit cards, PayPal, and mobile wallets. Payments are encrypted with TLS, and sensitive data is stored securely using AES-256 encryption. Two-factor authentication is available for extra account security."
+  },
+  {
+    "qid": "Q05",
+    "category": "Search & Filter",
+    "question": "How do I search and filter products on Shoplite?",
+    "answer": "Users can search products by keywords, categories, price range, ratings, and availability. Filters can be applied individually or in combination to refine search results."
+  },
+  {
+    "qid": "Q06",
+    "category": "Inventory",
+    "question": "How does Shoplite manage inventory for sellers?",
+    "answer": "Sellers can add, update, or remove products via their dashboard. Inventory counts are automatically updated when purchases are made, and low-stock alerts notify sellers to restock items."
+  },
+  {
+    "qid": "Q07",
+    "category": "Fees & Commissions",
+    "question": "What are the commission rates and fee structures for sellers?",
+    "answer": "Shoplite charges a standard 5% commission on each sale plus a small listing fee. Fees may vary depending on category and promotional campaigns."
+  },
+  {
+    "qid": "Q08",
+    "category": "Reviews",
+    "question": "How can users leave product reviews and ratings?",
+    "answer": "After purchase, users can leave reviews and ratings on product pages. Reviews require a verified purchase and may include text, images, and star ratings from 1 to 5."
+  },
+  {
+    "qid": "Q09",
+    "category": "Customer Support",
+    "question": "What customer support options are available on Shoplite?",
+    "answer": "Users can access live chat, email, phone support, and an AI chatbot. Tickets are tracked with unique IDs, and response times vary by issue complexity."
+  },
+  {
+    "qid": "Q10",
+    "category": "Account Management",
+    "question": "How can users manage their accounts?",
+    "answer": "Users can update profile info, change passwords, enable two-factor authentication, and view order history from the account dashboard."
+  },
+  {
+    "qid": "Q11",
+    "category": "Mobile App",
+    "question": "How do mobile app features differ from the web platform?",
+    "answer": "The mobile app supports browsing, checkout, push notifications, QR code scanning, and offline access. Sellers can manage stores and orders on the go."
+  },
+  {
+    "qid": "Q12",
+    "category": "API",
+    "question": "How do developers integrate with Shoplite APIs?",
+    "answer": "Developers can use RESTful endpoints with OAuth 2.0 authentication to access products, orders, and inventory. Webhooks notify real-time events, and sandbox testing is supported."
+  },
+  {
+    "qid": "Q13",
+    "category": "Privacy",
+    "question": "What privacy measures protect user data?",
+    "answer": "Shoplite encrypts data at rest and in transit, limits access to authorized personnel, and complies with GDPR and CCPA. Users can download or delete personal information."
+  },
+  {
+    "qid": "Q14",
+    "category": "Order Tracking",
+    "question": "How are orders tracked and delivered?",
+    "answer": "Users can track shipments via account dashboard or app. Delivery times depend on courier and location, with real-time updates provided."
+  },
+  {
+    "qid": "Q15",
+    "category": "Discounts",
+    "question": "How are discounts applied for special events?",
+    "answer": "Sellers can schedule discounts for events, and buyers are notified. Eligibility is verified automatically during checkout, and analytics track performance."
+  },
+  {
+    "qid": "Q16",
+    "category": "Product Quality",
+    "question": "How are product listings verified for quality?",
+    "answer": "Shoplite reviews product listings for compliance with policies. Inventory and product information must be accurate, and low-quality or prohibited items are flagged or removed."
+  },
+  {
+    "qid": "Q17",
+    "category": "Complex Questions",
+    "question": "How can multiple documents be used to answer complex questions?",
+    "answer": "For questions about both delivery and returns, Shoplite combines information from multiple documents, providing step-by-step guidance on return eligibility, tracking, and refunds."
+  },
+  {
+    "qid": "Q18",
+    "category": "Security",
+    "question": "How does Shoplite prevent unauthorized account access?",
+    "answer": "Shoplite enforces strong passwords, two-factor authentication, and monitors for suspicious login activity to prevent unauthorized access."
+  },
+  {
+    "qid": "Q19",
+    "category": "Analytics",
+    "question": "How can sellers analyze promotional campaign effectiveness?",
+    "answer": "Analytics track discount redemptions, revenue impact, and customer engagement, helping sellers optimize future campaigns."
+  },
+{
+  "qid": "Q20",
+  "category": "Order Processing",
+  "question": "How can I check the status of my order or get help with an order?",
+  "answer": "Users can check their order status via the account dashboard or mobile app by entering the order ID. For assistance, they can contact customer support through live chat, email, or phone, providing the order ID for faster resolution."
+}
+
+]

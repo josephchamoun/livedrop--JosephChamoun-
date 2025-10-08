@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getOrderStatus } from "../lib/api";
 import InfoRow from "../components (atomic design)/atoms/InfoRow";
+import { maskId, formatDate } from "../lib/format";
+import { MainLayout } from "../components (atomic design)/templates/MainLayout";
 
 interface OrderStatus {
   orderId: string;
@@ -23,16 +25,14 @@ export default function OrderStatusPage() {
 
   if (!order) {
     return (
-      <div className="p-6 max-w-4xl mx-auto text-center">
-        <p className="text-gray-600">Loading order status...</p>
-      </div>
+      <MainLayout>
+        <div className="p-6 max-w-4xl mx-auto text-center">
+          <p className="text-gray-600">Loading order status...</p>
+        </div>
+      </MainLayout>
     );
   }
 
-  // Mask all but last 4 chars
-  const displayId = order.orderId.slice(-4).padStart(order.orderId.length, "*");
-
-  // Map status to color
   const statusColor =
     order.status === "Delivered"
       ? "text-green-600"
@@ -41,25 +41,27 @@ export default function OrderStatusPage() {
       : "text-gray-700";
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6">Order Status</h1>
+    <MainLayout>
+      <div className="p-6 max-w-4xl mx-auto">
+        <h1 className="text-3xl font-bold mb-6">Order Status</h1>
 
-      <div className="bg-white border border-gray-200 rounded-lg shadow p-6 space-y-4">
-        <InfoRow label="Order ID" value={displayId} />
-        <InfoRow
-          label="Status"
-          value={order.status}
-          valueClassName={`font-bold ${statusColor}`}
-        />
-        {order.carrier && <InfoRow label="Carrier" value={order.carrier} />}
-        {order.eta && <InfoRow label="ETA" value={order.eta} />}
-      </div>
+        <div className="bg-white border border-gray-200 rounded-lg shadow p-6 space-y-4">
+          <InfoRow label="Order ID" value={maskId(order.orderId)} />
+          <InfoRow
+            label="Status"
+            value={order.status}
+            valueClassName={`font-bold ${statusColor}`}
+          />
+          {order.carrier && <InfoRow label="Carrier" value={order.carrier} />}
+          {order.eta && <InfoRow label="ETA" value={formatDate(order.eta)} />}
+        </div>
 
-      <div className="mt-6">
-        <Link to="/" className="text-blue-600 hover:underline font-medium">
-          ← Back to Catalog
-        </Link>
+        <div className="mt-6">
+          <Link to="/" className="text-blue-600 hover:underline font-medium">
+            ← Back to Catalog
+          </Link>
+        </div>
       </div>
-    </div>
+    </MainLayout>
   );
 }

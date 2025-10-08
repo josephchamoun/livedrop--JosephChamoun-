@@ -13,7 +13,7 @@ interface GroundTruthItem {
 }
 
 export function findAnswer(query: string): Answer {
-  // Detect order ID in query
+  // Detect order ID
   const orderMatch = query.match(/[A-Z0-9]{10,}/);
   if (orderMatch) {
     const status = getOrderStatus(orderMatch[0]);
@@ -21,7 +21,8 @@ export function findAnswer(query: string): Answer {
     return {
       text: `Order ${displayId} is currently ${status.status}${
         status.carrier ? ` with ${status.carrier}` : ""
-      }${status.eta ? `, ETA: ${status.eta}` : ""}.`,
+      }${status.eta ? `, ETA: ${status.eta}` : ""}. [Q00]`,
+      qid: "Q00", // you can reserve Q00 for system responses like order status
     };
   }
 
@@ -39,8 +40,11 @@ export function findAnswer(query: string): Answer {
 
   // Threshold: at least 2 keyword matches
   if (bestMatch && bestMatch.score >= 2) {
-    return { qid: bestMatch.item.qid, text: bestMatch.item.answer };
+    return {
+      qid: bestMatch.item.qid,
+      text: `${bestMatch.item.answer} [${bestMatch.item.qid}]`,
+    };
   }
 
-  return { text: "Sorry, I cannot answer that question." };
+  return { text: "Sorry, I don’t have information about that." };
 }

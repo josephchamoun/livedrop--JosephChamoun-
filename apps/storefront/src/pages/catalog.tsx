@@ -3,9 +3,9 @@ import { listProducts } from "../lib/api";
 import type { Product } from "../lib/api";
 import { useCartStore } from "../lib/store";
 import { Link } from "react-router-dom";
-import Input from "../components (atomic design)/atoms/Input";
-import ProductCard from "../components (atomic design)/molecules/ProductCard";
-import { MainLayout } from "../components (atomic design)/templates/MainLayout";
+import Input from "../components/atoms/Input";
+import ProductCard from "../components/molecules/ProductCard";
+import { MainLayout } from "../components/templates/MainLayout";
 
 export default function CatalogPage() {
   const [products, setProducts] = useState<Product[]>([]);

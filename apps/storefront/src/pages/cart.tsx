@@ -1,9 +1,9 @@
 import { useCartStore } from "../lib/store";
 import { Link } from "react-router-dom";
-import CartItemCard from "../components (atomic design)/molecules/CartItemCard";
-import Button from "../components (atomic design)/atoms/Button";
+import CartItemCard from "../components/molecules/CartItemCard";
+import Button from "../components/atoms/Button";
 import { formatCurrency } from "../lib/format";
-import { MainLayout } from "../components (atomic design)/templates/MainLayout";
+import { MainLayout } from "../components/templates/MainLayout";
 
 export default function CartPage() {
   const { items, updateQty, removeItem, clearCart } = useCartStore();

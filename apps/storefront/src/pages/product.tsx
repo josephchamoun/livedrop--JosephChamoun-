@@ -3,10 +3,10 @@ import { useParams, Link } from "react-router-dom";
 import { getProduct, listProducts } from "../lib/api";
 import type { Product } from "../lib/api";
 import { useCartStore } from "../lib/store";
-import Button from "../components (atomic design)/atoms/Button";
-import Tag from "../components (atomic design)/atoms/Tag";
+import Button from "../components/atoms/Button";
+import Tag from "../components/atoms/Tag";
 import { formatCurrency } from "../lib/format";
-import { MainLayout } from "../components (atomic design)/templates/MainLayout";
+import { MainLayout } from "../components/templates/MainLayout";
 
 export default function ProductPage() {
   const { id } = useParams<{ id: string }>();

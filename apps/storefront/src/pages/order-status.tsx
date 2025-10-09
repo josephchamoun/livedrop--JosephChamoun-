@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getOrderStatus } from "../lib/api";
-import InfoRow from "../components (atomic design)/atoms/InfoRow";
+import InfoRow from "../components/atoms/InfoRow";
 import { maskId, formatDate } from "../lib/format";
-import { MainLayout } from "../components (atomic design)/templates/MainLayout";
+import { MainLayout } from "../components/templates/MainLayout";
 
 interface OrderStatus {
   orderId: string;

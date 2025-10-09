@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useCartStore } from "../lib/store";
 import { placeOrder } from "../lib/api";
-import Button from "../components (atomic design)/atoms/Button";
+import Button from "../components/atoms/Button";
 import { formatCurrency } from "../lib/format";
-import { MainLayout } from "../components (atomic design)/templates/MainLayout";
+import { MainLayout } from "../components/templates/MainLayout";
 
 export default function CheckoutPage() {
   const { items, clearCart } = useCartStore();

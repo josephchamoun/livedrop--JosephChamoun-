@@ -24,16 +24,21 @@ export default function SupportPanel() {
 
   return (
     <>
-      <button
-        onClick={() => setOpen(!open)}
-        className="fixed bottom-6 right-6 bg-blue-600 text-white p-3 rounded-full shadow-lg z-50 hover:bg-blue-700 transition"
-      >
-        Support
-      </button>
+      {/* Support button: only show when panel is closed */}
+      {!open && (
+        <button
+          onClick={() => setOpen(true)}
+          className="fixed bottom-6 right-6 bg-blue-600 text-white p-3 rounded-full shadow-lg z-50 hover:bg-blue-700 transition"
+        >
+          Support
+        </button>
+      )}
 
+      {/* Chat panel */}
       {open && (
-        <div className="fixed inset-0 bg-black bg-opacity-30 z-40 flex justify-end">
-          <div className="w-80 bg-white h-full p-4 shadow-xl flex flex-col">
+        <div className="fixed inset-0 bg-black bg-opacity-30 z-50 flex justify-end">
+          <div className="w-80 bg-white h-full p-4 shadow-xl flex flex-col z-50">
+            {/* Header */}
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-bold">Ask Support</h2>
               <button
@@ -44,6 +49,7 @@ export default function SupportPanel() {
               </button>
             </div>
 
+            {/* Messages */}
             <div className="flex-1 overflow-y-auto flex flex-col gap-2 mb-4">
               {responses.map((r, idx) => (
                 <Card key={idx} variant={r.variant}>
@@ -52,6 +58,7 @@ export default function SupportPanel() {
               ))}
             </div>
 
+            {/* Input */}
             <ChatInput
               value={query}
               onChange={setQuery}

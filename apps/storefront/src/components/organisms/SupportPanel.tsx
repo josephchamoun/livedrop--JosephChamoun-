@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { findAnswer } from "../../assistant/engine";
+import axios from "axios";
 import Card from "../atoms/Card";
 import ChatInput from "../molecules/ChatInput";
 
@@ -7,34 +7,61 @@ export default function SupportPanel() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [responses, setResponses] = useState<
-    { qid?: string; text: string; variant?: "user" | "support" }[]
+    { text: string; variant?: "user" | "support" }[]
   >([]);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = () => {
+  // Your deployed AI assistant endpoint
+  const LLM_URL = "https://a6d54209809a.ngrok-free.app/chat";
+
+  const handleSubmit = async () => {
     if (!query.trim()) return;
 
-    const answer = findAnswer(query.trim());
-    setResponses([
-      ...responses,
-      { text: query, variant: "user" },
-      { text: answer.text, qid: answer.qid, variant: "support" },
-    ]);
+    const userMessage = query.trim();
+    setResponses((prev) => [...prev, { text: userMessage, variant: "user" }]);
     setQuery("");
+    setLoading(true);
+
+    try {
+      const res = await axios.post(LLM_URL, {
+        query: userMessage,
+      });
+
+      // Handle different possible response formats
+      const answerText =
+        res.data.answer ||
+        res.data.response ||
+        res.data.text ||
+        "No response received.";
+
+      setResponses((prev) => [
+        ...prev,
+        { text: answerText, variant: "support" },
+      ]);
+    } catch (err) {
+      console.error("Error calling AI:", err);
+      setResponses((prev) => [
+        ...prev,
+        { text: "⚠️ Error connecting to AI assistant.", variant: "support" },
+      ]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <>
-      {/* Support button: only show when panel is closed */}
+      {/* Floating Support Button */}
       {!open && (
         <button
           onClick={() => setOpen(true)}
           className="fixed bottom-6 right-6 bg-blue-600 text-white p-3 rounded-full shadow-lg z-50 hover:bg-blue-700 transition"
         >
-          Support
+          💬 Support
         </button>
       )}
 
-      {/* Chat panel */}
+      {/* Chat Panel */}
       {open && (
         <div className="fixed inset-0 bg-black bg-opacity-30 z-50 flex justify-end">
           <div className="w-80 bg-white h-full p-4 shadow-xl flex flex-col z-50">
@@ -49,13 +76,21 @@ export default function SupportPanel() {
               </button>
             </div>
 
-            {/* Messages */}
+            {/* Chat Messages */}
             <div className="flex-1 overflow-y-auto flex flex-col gap-2 mb-4">
               {responses.map((r, idx) => (
                 <Card key={idx} variant={r.variant}>
-                  {r.qid ? `[${r.qid}] ${r.text}` : r.text}
+                  {r.text}
                 </Card>
               ))}
+
+              {loading && (
+                <Card variant="support">
+                  <span className="text-gray-400 italic">
+                    Assistant typing...
+                  </span>
+                </Card>
+              )}
             </div>
 
             {/* Input */}

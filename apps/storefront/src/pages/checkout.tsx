@@ -1,21 +1,56 @@
 import { useNavigate } from "react-router-dom";
 import { useCartStore } from "../lib/store";
-import { placeOrder } from "../lib/api";
+import { createOrder } from "../lib/api";
 import Button from "../components/atoms/Button";
 import { formatCurrency } from "../lib/format";
 import { MainLayout } from "../components/templates/MainLayout";
+import { useEffect, useState } from "react";
 
 export default function CheckoutPage() {
   const { items, clearCart } = useCartStore();
   const navigate = useNavigate();
+  const [user, setUser] = useState<{ email: string } | null>(null);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("user");
+    if (stored) setUser(JSON.parse(stored));
+  }, []);
 
   const total = items.reduce((sum, item) => sum + item.price * item.qty, 0);
 
-  const handlePlaceOrder = () => {
+  const handlePlaceOrder = async () => {
+    if (!user) {
+      alert("Please log in first");
+      navigate("/login"); // optional: redirect to login
+      return;
+    }
     if (items.length === 0) return;
-    const { orderId } = placeOrder(items);
-    clearCart();
-    navigate(`/order/${orderId}`);
+
+    try {
+      const orderItems = items.map((item) => ({
+        productId: item.id,
+        name: item.title,
+        price: item.price,
+        quantity: item.qty,
+      }));
+
+      const orderData = {
+        customerEmail: user.email,
+        items: orderItems,
+        carrier: "FedEx",
+        estimatedDelivery: new Date(
+          Date.now() + 5 * 24 * 60 * 60 * 1000
+        ).toISOString(),
+      };
+
+      const order = await createOrder(orderData);
+
+      clearCart();
+      navigate(`/order/${order._id}`);
+    } catch (err) {
+      console.error("Failed to place order:", err);
+      alert("Failed to place order. Please try again.");
+    }
   };
 
   if (items.length === 0) {

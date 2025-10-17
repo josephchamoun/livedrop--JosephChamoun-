@@ -1,7 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getProduct, listProducts } from "../lib/api";
-import type { Product } from "../lib/api";
+import { getProductById, listProducts, type Product } from "../lib/api";
 import { useCartStore } from "../lib/store";
 import Button from "../components/atoms/Button";
 import Tag from "../components/atoms/Tag";
@@ -20,15 +19,17 @@ export default function ProductPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const prod = await getProduct(id!);
+        // ✅ Use getProductById (not getProduct)
+        const prod = await getProductById(id!);
         if (!prod) {
           setError("Product not found");
           return;
         }
         setProduct(prod);
 
+        // ✅ Fetch all products for “related” section
         const products = await listProducts();
-        setAllProducts(products.filter((p) => p.id !== id)); // exclude current
+        setAllProducts(products.filter((p) => p._id !== id)); // exclude current
       } catch (err) {
         console.error(err);
         setError("Failed to load product");
@@ -40,6 +41,7 @@ export default function ProductPage() {
     fetchData();
   }, [id]);
 
+  // ✅ Filter related by shared tags
   const relatedProducts = useMemo(() => {
     if (!product) return [];
     return allProducts
@@ -53,34 +55,37 @@ export default function ProductPage() {
         <p className="p-6">Loading product...</p>
       </MainLayout>
     );
+
   if (error)
     return (
       <MainLayout>
         <p className="p-6 text-red-600">{error}</p>
       </MainLayout>
     );
+
   if (!product) return null;
 
   return (
     <MainLayout>
       <div className="p-6 max-w-4xl mx-auto">
         <div className="flex flex-col md:flex-row gap-6">
+          {/* ✅ Use correct API field names */}
           <img
-            src={product.image}
-            alt={product.title}
+            src={product.imageUrl}
+            alt={product.name}
             className="w-full md:w-1/2 h-80 object-cover rounded-lg shadow"
           />
 
           <div className="flex-1 flex flex-col">
-            <h1 className="text-3xl font-bold mb-2">{product.title}</h1>
+            <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
             <p className="text-blue-600 font-bold text-2xl mb-4">
               {formatCurrency(product.price)}
             </p>
             <p className="text-gray-700 mb-4">
               Stock:{" "}
-              {product.stockQty > 0 ? (
+              {product.stock > 0 ? (
                 <span className="text-green-600">
-                  {product.stockQty} available
+                  {product.stock} available
                 </span>
               ) : (
                 <span className="text-red-600">Out of stock</span>
@@ -96,18 +101,18 @@ export default function ProductPage() {
             <Button
               onClick={() =>
                 addItem({
-                  id: product.id,
-                  title: product.title,
+                  id: product._id,
+                  title: product.name,
                   price: product.price,
                   qty: 1,
                 })
               }
-              disabled={product.stockQty === 0}
+              disabled={product.stock === 0}
               className={`mt-auto w-full ${
-                product.stockQty === 0 ? "opacity-50 cursor-not-allowed" : ""
+                product.stock === 0 ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
-              {product.stockQty === 0 ? "Out of Stock" : "Add to Cart"}
+              {product.stock === 0 ? "Out of Stock" : "Add to Cart"}
             </Button>
           </div>
         </div>
@@ -118,18 +123,18 @@ export default function ProductPage() {
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-4">
               {relatedProducts.map((p) => (
                 <Link
-                  key={p.id}
-                  to={`/p/${p.id}`}
+                  key={p._id}
+                  to={`/p/${p._id}`}
                   className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200 flex flex-col"
                 >
                   <img
-                    src={p.image}
-                    alt={p.title}
+                    src={p.imageUrl}
+                    alt={p.name}
                     className="w-full h-32 object-cover rounded-t-lg"
                   />
                   <div className="p-3 flex-1 flex flex-col">
                     <h3 className="font-medium text-gray-800 text-sm mb-1">
-                      {p.title}
+                      {p.name}
                     </h3>
                     <p className="text-blue-600 font-bold text-sm mt-auto">
                       {formatCurrency(p.price)}

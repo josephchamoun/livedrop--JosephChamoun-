@@ -1,0 +1,107 @@
+[
+  {
+    "id": "Policy3.1",
+    "question": "What is your return policy?",
+    "answer": "Items can be returned within 30 days of purchase with the original receipt. Refunds are processed within 5–7 business days.",
+    "category": "returns",
+    "lastUpdated": "2025-10-01T00:00:00Z"
+  },
+  {
+    "id": "Policy3.2",
+    "question": "Can I exchange an item after purchase?",
+    "answer": "Yes, exchanges are accepted within 30 days for items in unused condition. The item must include all original packaging and tags.",
+    "category": "returns",
+    "lastUpdated": "2025-10-02T00:00:00Z"
+  },
+  {
+    "id": "Policy3.3",
+    "question": "Are there items that cannot be returned?",
+    "answer": "Yes. Perishable goods, personalized products, and items marked as 'final sale' cannot be returned or exchanged.",
+    "category": "returns",
+    "lastUpdated": "2025-10-03T00:00:00Z"
+  },
+  {
+    "id": "Shipping2.1",
+    "question": "What are your shipping options?",
+    "answer": "We offer Standard (5–7 days), Express (2–3 days), and Overnight (1 day) shipping within the continental U.S.",
+    "category": "shipping",
+    "lastUpdated": "2025-10-01T00:00:00Z"
+  },
+  {
+    "id": "Shipping2.2",
+    "question": "Do you ship internationally?",
+    "answer": "Yes, we ship to over 50 countries. International shipping times vary between 7–21 business days depending on location.",
+    "category": "shipping",
+    "lastUpdated": "2025-10-02T00:00:00Z"
+  },
+  {
+    "id": "Shipping2.3",
+    "question": "How can I track my order?",
+    "answer": "Once your order ships, you will receive an email with a tracking number and carrier link to follow your delivery in real-time.",
+    "category": "shipping",
+    "lastUpdated": "2025-10-04T00:00:00Z"
+  },
+  {
+    "id": "Shipping2.4",
+    "question": "What happens if my order is delayed?",
+    "answer": "If your order is delayed beyond the estimated delivery window, please contact our support team for assistance or compensation options.",
+    "category": "shipping",
+    "lastUpdated": "2025-10-05T00:00:00Z"
+  },
+  {
+    "id": "Warranty4.1",
+    "question": "Do your products come with a warranty?",
+    "answer": "Yes, most electronics and appliances include a 1-year manufacturer warranty covering defects in materials and workmanship.",
+    "category": "warranty",
+    "lastUpdated": "2025-10-01T00:00:00Z"
+  },
+  {
+    "id": "Warranty4.2",
+    "question": "How can I claim a warranty repair or replacement?",
+    "answer": "To make a warranty claim, contact our support team with your purchase receipt and product serial number for verification.",
+    "category": "warranty",
+    "lastUpdated": "2025-10-03T00:00:00Z"
+  },
+  {
+    "id": "Privacy1.1",
+    "question": "How do you protect my personal data?",
+    "answer": "We use encryption, secure servers, and limited employee access to ensure all customer information is safely stored and processed.",
+    "category": "privacy",
+    "lastUpdated": "2025-10-02T00:00:00Z"
+  },
+  {
+    "id": "Privacy1.2",
+    "question": "Do you share my data with third parties?",
+    "answer": "We do not sell personal information. Data may be shared only with trusted partners for order fulfillment and payment processing.",
+    "category": "privacy",
+    "lastUpdated": "2025-10-04T00:00:00Z"
+  },
+  {
+    "id": "Privacy1.3",
+    "question": "How can I delete my account or request my data?",
+    "answer": "You can request account deletion or data export by contacting privacy@shoplite.com with your registered email address.",
+    "category": "privacy",
+    "lastUpdated": "2025-10-05T00:00:00Z"
+  },
+  {
+    "id": "Payment5.1",
+    "question": "What payment methods do you accept?",
+    "answer": "We accept Visa, MasterCard, PayPal, Apple Pay, and Shoplite gift cards. Some regions also support Cash on Delivery.",
+    "category": "payment",
+    "lastUpdated": "2025-10-03T00:00:00Z"
+  },
+  {
+    "id": "Payment5.2",
+    "question": "Is my payment information secure?",
+    "answer": "Yes. All transactions are processed through encrypted payment gateways that comply with PCI-DSS security standards.",
+    "category": "payment",
+    "lastUpdated": "2025-10-03T00:00:00Z"
+  },
+  {
+    "id": "Payment5.3",
+    "question": "Can I cancel an order after payment?",
+    "answer": "Orders can be canceled within 2 hours of placement. After shipment, cancellation is not possible but you may request a return.",
+    "category": "payment",
+    "lastUpdated": "2025-10-06T00:00:00Z"
+  }
+]

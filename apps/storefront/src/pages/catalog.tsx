@@ -1,16 +1,17 @@
 import { useEffect, useState, useMemo } from "react";
-import { listProducts } from "../lib/api";
-import type { Product } from "../lib/api";
+import { getProducts, createProduct, type Product } from "../lib/api";
 import { useCartStore } from "../lib/store";
-import { Link } from "react-router-dom";
 import Input from "../components/atoms/Input";
+import Button from "../components/atoms/Button";
 import ProductCard from "../components/molecules/ProductCard";
+import ProductForm from "../components/molecules/ProductForm";
 import { MainLayout } from "../components/templates/MainLayout";
 
 export default function CatalogPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [showForm, setShowForm] = useState(false);
 
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState<"asc" | "desc">("asc");
@@ -21,7 +22,7 @@ export default function CatalogPage() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const data = await listProducts();
+        const data = await getProducts();
         setProducts(data);
       } catch (err) {
         console.error(err);
@@ -45,7 +46,7 @@ export default function CatalogPage() {
       const lower = search.toLowerCase();
       filtered = filtered.filter(
         (p) =>
-          p.title.toLowerCase().includes(lower) ||
+          p.name.toLowerCase().includes(lower) ||
           p.tags.some((t) => t.toLowerCase().includes(lower))
       );
     }
@@ -56,6 +57,24 @@ export default function CatalogPage() {
       sort === "asc" ? a.price - b.price : b.price - a.price
     );
   }, [products, search, sort, tagFilter]);
+
+  const handleAddProduct = async (data: {
+    name: string;
+    description: string;
+    price: number;
+    stock: number;
+    imageUrl: string;
+    tags: string[];
+  }) => {
+    try {
+      const newProduct = await createProduct(data);
+      setProducts((prev) => [newProduct, ...prev]);
+      setShowForm(false);
+    } catch (err) {
+      console.error("Failed to add product", err);
+      alert("Failed to add product. See console for details.");
+    }
+  };
 
   if (loading)
     return (
@@ -74,13 +93,10 @@ export default function CatalogPage() {
   return (
     <MainLayout>
       <div className="p-6 max-w-7xl mx-auto">
-        <div className="text-center mb-8">
-          <Link to="/cart" className="text-blue-600 hover:underline">
-            View Cart
-          </Link>
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-4xl font-bold text-gray-900">Catalog</h1>
+          <Button onClick={() => setShowForm(true)}>Add Product</Button>
         </div>
-
-        <h1 className="text-4xl font-bold mb-8 text-gray-900">Catalog</h1>
 
         {/* Controls */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
@@ -90,7 +106,6 @@ export default function CatalogPage() {
             onChange={(e) => setSearch(e.target.value)}
             className="w-full sm:w-64"
           />
-
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value as "asc" | "desc")}
@@ -99,7 +114,6 @@ export default function CatalogPage() {
             <option value="asc">Price: Low → High</option>
             <option value="desc">Price: High → Low</option>
           </select>
-
           <select
             value={tagFilter}
             onChange={(e) => setTagFilter(e.target.value)}
@@ -118,25 +132,31 @@ export default function CatalogPage() {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
           {filteredProducts.map((product) => (
             <ProductCard
-              key={product.id}
+              key={product._id}
               product={product}
-              onAddToCart={() =>
+              onAddToCart={(qty) =>
                 addItem({
-                  id: product.id,
-                  title: product.title,
+                  id: product._id,
+                  title: product.name,
                   price: product.price,
-                  qty: 1,
+                  qty, // use selected quantity
                 })
               }
             />
           ))}
-
           {filteredProducts.length === 0 && (
             <p className="col-span-full text-center text-gray-500">
               No products found.
             </p>
           )}
         </div>
+
+        {showForm && (
+          <ProductForm
+            onSubmit={handleAddProduct}
+            onClose={() => setShowForm(false)}
+          />
+        )}
       </div>
     </MainLayout>
   );

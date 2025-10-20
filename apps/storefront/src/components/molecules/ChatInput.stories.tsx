@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 // src/components/molecules/ChatInput.stories.tsx
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import ChatInput from "./ChatInput";
 

@@ -1,5 +1,5 @@
 // src/components/molecules/ProductCard.stories.tsx
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import ProductCard from "./ProductCard";
 import type { Product } from "../../lib/api";
 import { MemoryRouter } from "react-router-dom"; // 👈 import this

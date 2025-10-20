@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react";
+import type { Meta, StoryFn } from "@storybook/react-vite";
 import InfoRow from "./InfoRow";
 
 const meta: Meta<typeof InfoRow> = {

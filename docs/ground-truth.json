@@ -1,0 +1,72 @@
+[
+  {
+    "id": "Policy3.1",
+    "question": "What is your return policy?",
+    "answer": "Items can be returned within 30 days of purchase with original receipt. All items must be in original condition with tags attached. Refunds are processed within 5-7 business days.",
+    "category": "returns",
+    "lastUpdated": "2025-10-01T00:00:00Z"
+  },
+  {
+    "id": "Shipping2.1",
+    "question": "What are your shipping options?",
+    "answer": "We offer Standard (5-7 days, $5.99), Express (2-3 days, $12.99), and Overnight ($24.99) shipping. Free shipping on orders over $50.",
+    "category": "shipping",
+    "lastUpdated": "2025-10-01T00:00:00Z"
+  },
+  {
+    "id": "Warranty4.1",
+    "question": "Do you offer warranties?",
+    "answer": "Yes! All electronics come with a 1-year manufacturer warranty. Extended warranties are available for purchase at checkout.",
+    "category": "warranty",
+    "lastUpdated": "2025-10-01T00:00:00Z"
+  },
+  {
+    "id": "Privacy5.1",
+    "question": "How do you handle my personal data?",
+    "answer": "We never sell your data to third parties. Your information is encrypted and used only for order processing and customer service.",
+    "category": "privacy",
+    "lastUpdated": "2025-10-01T00:00:00Z"
+  },
+  {
+    "id": "Shipping2.2",
+    "question": "Do you ship internationally?",
+    "answer": "Yes, we ship to over 50 countries. International shipping starts at $19.99 and takes 7-14 business days.",
+    "category": "shipping",
+    "lastUpdated": "2025-10-01T00:00:00Z"
+  },
+  {
+    "id": "Returns3.2",
+    "question": "Can I exchange an item?",
+    "answer": "Absolutely! Exchanges follow the same 30-day policy as returns. Simply indicate you'd like an exchange when you initiate your return.",
+    "category": "returns",
+    "lastUpdated": "2025-10-01T00:00:00Z"
+  },
+  {
+    "id": "Security6.1",
+    "question": "Is my payment information secure?",
+    "answer": "Yes! We use industry-standard SSL encryption and never store your full credit card details. All payments are processed through certified PCI-compliant gateways.",
+    "category": "security",
+    "lastUpdated": "2025-10-01T00:00:00Z"
+  },
+  {
+    "id": "Returns3.3",
+    "question": "What if my item is defective?",
+    "answer": "Defective items can be returned for a full refund or replacement at no cost to you. Contact us immediately and we'll arrange a prepaid return label.",
+    "category": "returns",
+    "lastUpdated": "2025-10-01T00:00:00Z"
+  },
+  {
+    "id": "Shipping2.3",
+    "question": "Can I track my package?",
+    "answer": "Yes! Once shipped, you'll receive a tracking number via email. You can also check your order status in your account dashboard.",
+    "category": "shipping",
+    "lastUpdated": "2025-10-01T00:00:00Z"
+  },
+  {
+    "id": "Warranty4.2",
+    "question": "What does the warranty cover?",
+    "answer": "Warranties cover manufacturing defects and hardware failures under normal use. They do not cover accidental damage, water damage, or wear and tear.",
+    "category": "warranty",
+    "lastUpdated": "2025-10-01T00:00:00Z"
+  }
+]

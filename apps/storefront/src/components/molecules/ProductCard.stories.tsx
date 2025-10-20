@@ -5,11 +5,11 @@ import type { Product } from "../../lib/api";
 import { MemoryRouter } from "react-router-dom"; // 👈 import this
 
 const sampleProduct: Product = {
-  id: "1",
-  title: "Sample Product",
-  image: "https://via.placeholder.com/150",
+  _id: "1",
+  name: "Sample Product",
+  imageUrl: "https://via.placeholder.com/150",
   price: 19.99,
-  stockQty: 5,
+  stock: 5,
   tags: ["tag1", "tag2"],
 };
 

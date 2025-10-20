@@ -1,6 +1,7 @@
+// src/pages/checkout.tsx
 import { useNavigate } from "react-router-dom";
 import { useCartStore } from "../lib/store";
-import { placeOrder } from "../lib/api";
+import { createOrder } from "../lib/api";
 import Button from "../components/atoms/Button";
 import { formatCurrency } from "../lib/format";
 import { MainLayout } from "../components/templates/MainLayout";
@@ -11,11 +12,42 @@ export default function CheckoutPage() {
 
   const total = items.reduce((sum, item) => sum + item.price * item.qty, 0);
 
-  const handlePlaceOrder = () => {
+  const handlePlaceOrder = async () => {
     if (items.length === 0) return;
-    const { orderId } = placeOrder(items);
-    clearCart();
-    navigate(`/order/${orderId}`);
+
+    const user = localStorage.getItem("user");
+    if (!user) {
+      alert("Please log in first");
+      navigate("/login");
+      return;
+    }
+
+    const parsedUser = JSON.parse(user);
+
+    try {
+      // Convert CartItem[] to the backend format
+      const orderItems = items.map((item) => ({
+        productId: item.id,
+        quantity: item.qty, // only quantity needed
+      }));
+
+      const orderData = {
+        customerEmail: parsedUser.email, // use email instead of _id
+        items: orderItems,
+        carrier: "FedEx",
+        estimatedDelivery: new Date(
+          Date.now() + 5 * 24 * 60 * 60 * 1000
+        ).toISOString(),
+      };
+
+      const order = await createOrder(orderData);
+
+      clearCart();
+      navigate(`/order/${order._id}`);
+    } catch (err) {
+      console.error("Failed to place order:", err);
+      alert("Failed to place order. Please try again.");
+    }
   };
 
   if (items.length === 0) {

@@ -6,6 +6,7 @@ interface ChatInputProps {
   value: string;
   onChange: (v: string) => void;
   onSubmit: () => void;
+  disabled?: boolean;
 }
 
 export default function ChatInput({

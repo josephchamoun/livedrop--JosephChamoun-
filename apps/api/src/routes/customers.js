@@ -22,4 +22,34 @@ router.get('/:id', async (req, res, next) => {
   } catch (err) { next(err); }
 });
 
+// POST /api/customers - Create new customer
+router.post('/', async (req, res, next) => {
+  try {
+    const { name, email, phone, address } = req.body;
+    
+    if (!email) {
+      return res.status(400).json({ error: 'Email is required' });
+    }
+
+    // Check if customer already exists
+    const existingCustomer = await Customer.findOne({ email: email.toLowerCase() });
+    if (existingCustomer) {
+      return res.status(409).json({ error: 'Customer already exists', customer: existingCustomer });
+    }
+
+    // Create new customer
+    const customer = new Customer({
+      name: name || 'Guest User',
+      email: email.toLowerCase(),
+      phone: phone || '',
+      address: address || ''
+    });
+
+    await customer.save();
+    res.status(201).json(customer);
+  } catch (err) { 
+    next(err); 
+  }
+});
+
 module.exports = router;

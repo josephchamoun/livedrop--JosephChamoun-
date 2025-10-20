@@ -208,6 +208,39 @@ export async function getCustomerByEmail(email: string): Promise<Customer | null
     throw err;
   }
 }
+export async function createCustomer(data: {
+  name?: string;
+  email: string;
+  phone?: string;
+  address?: string;
+}): Promise<Customer> {
+  return fetchJSON<Customer>(`${API_BASE}/customers`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+}
+
+/**
+ * Get or create customer by email
+ * Returns existing customer or creates a new one
+ */
+export async function getOrCreateCustomer(email: string, name?: string): Promise<Customer> {
+  try {
+    // Try to get existing customer
+    const customer = await getCustomerByEmail(email);
+    if (customer) return customer;
+    
+    // If not found, create new customer
+    return await createCustomer({ email, name });
+  } catch (err: any) {
+    if (err.message.includes("404") || err.message.includes("not found")) {
+      // Customer doesn't exist, create new one
+      return await createCustomer({ email, name });
+    }
+    throw err;
+  }
+}
 
 /**
  * Get customer by ID

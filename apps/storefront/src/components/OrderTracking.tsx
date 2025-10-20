@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { subscribeToOrderStatus } from "../lib/api";
 
 interface OrderStatus {
   orderId: string;
@@ -15,33 +16,32 @@ interface Props {
 export function OrderTracking({ orderId }: Props) {
   const [order, setOrder] = useState<OrderStatus | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
-    const evtSource = new EventSource(
-      `http://localhost:4000/api/orders/${orderId}/stream`
+    // Use the API helper which automatically uses the correct URL
+    const unsubscribe = subscribeToOrderStatus(
+      orderId,
+      (data) => {
+        setOrder(data as OrderStatus);
+        setLoading(false);
+        setError("");
+      },
+      (err) => {
+        console.error("SSE error:", err);
+        setError("Failed to connect to order updates");
+        setLoading(false);
+      }
     );
 
-    evtSource.addEventListener("status", (event) => {
-      const data = JSON.parse((event as MessageEvent).data);
-      setOrder(data);
-      setLoading(false);
-
-      if (data.status === "DELIVERED") {
-        evtSource.close();
-      }
-    });
-
-    evtSource.addEventListener("error", (err) => {
-      console.error("SSE error:", err);
-      evtSource.close();
-    });
-
+    // Cleanup on unmount
     return () => {
-      evtSource.close();
+      unsubscribe();
     };
   }, [orderId]);
 
   if (loading) return <p>Loading order status...</p>;
+  if (error) return <p className="text-red-600">{error}</p>;
   if (!order) return <p>No order found.</p>;
 
   return (

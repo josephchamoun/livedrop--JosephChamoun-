@@ -1,6 +1,7 @@
 // src/pages/OrderStatusPage.tsx
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { subscribeToOrderStatus } from "../lib/api";
 import InfoRow from "../components/atoms/InfoRow";
 import { maskId, formatDate } from "../lib/format";
 import { MainLayout } from "../components/templates/MainLayout";
@@ -17,34 +18,29 @@ export default function OrderStatusPage() {
   const { id } = useParams<{ id: string }>();
   const [order, setOrder] = useState<OrderStatus | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     if (!id) return;
 
-    const evtSource = new EventSource(
-      `http://localhost:4000/api/orders/${id}/stream`
+    // Use the API helper which automatically uses the correct URL from env
+    const unsubscribe = subscribeToOrderStatus(
+      id,
+      (data) => {
+        setOrder(data as OrderStatus);
+        setLoading(false);
+        setError("");
+      },
+      (err) => {
+        console.error("SSE error:", err);
+        setError("Failed to connect to order updates");
+        setLoading(false);
+      }
     );
 
-    // Listen for named events ("status") from backend
-    evtSource.addEventListener("status", (event) => {
-      const data = JSON.parse((event as MessageEvent).data);
-      setOrder(data);
-      setLoading(false);
-
-      // Close connection if order is delivered
-      if (data.status === "DELIVERED") {
-        evtSource.close();
-      }
-    });
-
-    // Handle errors
-    evtSource.addEventListener("error", (err) => {
-      console.error("SSE error:", err);
-      evtSource.close();
-    });
-
+    // Cleanup on unmount
     return () => {
-      evtSource.close();
+      unsubscribe();
     };
   }, [id]);
 
@@ -52,7 +48,25 @@ export default function OrderStatusPage() {
     return (
       <MainLayout>
         <div className="p-6 max-w-4xl mx-auto text-center">
-          <p className="text-gray-600">Loading order status...</p>
+          <div className="animate-pulse">
+            <div className="h-8 bg-gray-200 rounded w-48 mx-auto mb-4"></div>
+            <p className="text-gray-600">Loading order status...</p>
+          </div>
+        </div>
+      </MainLayout>
+    );
+  }
+
+  if (error) {
+    return (
+      <MainLayout>
+        <div className="p-6 max-w-4xl mx-auto text-center">
+          <div className="bg-red-50 border border-red-200 rounded-lg p-6">
+            <p className="text-red-600 font-semibold mb-4">{error}</p>
+            <Link to="/" className="text-blue-600 hover:underline font-medium">
+              ← Back to Catalog
+            </Link>
+          </div>
         </div>
       </MainLayout>
     );
@@ -62,7 +76,10 @@ export default function OrderStatusPage() {
     return (
       <MainLayout>
         <div className="p-6 max-w-4xl mx-auto text-center">
-          <p className="text-gray-600">No order found.</p>
+          <p className="text-gray-600 mb-4">No order found.</p>
+          <Link to="/" className="text-blue-600 hover:underline font-medium">
+            ← Back to Catalog
+          </Link>
         </div>
       </MainLayout>
     );
@@ -98,10 +115,15 @@ export default function OrderStatusPage() {
           )}
         </div>
 
-        <div className="mt-6">
+        <div className="mt-6 flex items-center space-x-4">
           <Link to="/" className="text-blue-600 hover:underline font-medium">
             ← Back to Catalog
           </Link>
+          {order.status !== "DELIVERED" && (
+            <span className="text-sm text-gray-500">
+              • Updates automatically
+            </span>
+          )}
         </div>
       </div>
     </MainLayout>

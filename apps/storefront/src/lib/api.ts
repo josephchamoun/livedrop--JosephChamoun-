@@ -99,7 +99,7 @@ export interface AssistantResponse {
 
 // ==================== API HELPERS ====================
 
-const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:4000/api";
+const API_BASE = import.meta.env.VITE_API_URL || "https://livedrop-josephchamoun.onrender.com/api";
 
 async function fetchJSON<T>(url: string, options?: RequestInit): Promise<T> {
   const res = await fetch(url, options);

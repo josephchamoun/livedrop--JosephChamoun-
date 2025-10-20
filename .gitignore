@@ -1,0 +1,37 @@
+# ==============================
+# General
+# ==============================
+node_modules/
+.env
+*.env
+dist/
+build/
+.next/
+out/
+logs/
+*.log
+
+# ==============================
+# API
+# ==============================
+apps/api/node_modules/
+apps/api/.env
+apps/api/dist/
+apps/api/logs/
+
+# ==============================
+# Storefront
+# ==============================
+apps/storefront/node_modules/
+apps/storefront/.env
+apps/storefront/.next/
+apps/storefront/dist/
+apps/storefront/build/
+
+# ==============================
+# System / IDE
+# ==============================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

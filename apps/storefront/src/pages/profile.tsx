@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { MainLayout } from "../components/templates/MainLayout";
+import { getCustomerById } from "../lib/api"; // ✅ This already points to Render
 import {
   User,
   Mail,
@@ -8,6 +11,7 @@ import {
   Calendar,
   Loader2,
   AlertCircle,
+  LogOut,
 } from "lucide-react";
 
 interface Customer {
@@ -20,41 +24,55 @@ interface Customer {
 }
 
 export default function ProfilePage() {
+  const navigate = useNavigate();
   const [customer, setCustomer] = useState<Customer | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (!storedUser) {
-      setError("No logged-in user found");
-      setLoading(false);
-      return;
-    }
-
-    const user = JSON.parse(storedUser);
-    const customerId = user._id;
-
     const fetchCustomer = async () => {
       try {
-        const res = await fetch(
-          `http://localhost:4000/api/customers/${customerId}`
-        );
-        if (!res.ok) throw new Error("Failed to fetch customer");
-        const data = await res.json();
+        // Get user from localStorage
+        const storedUser = localStorage.getItem("user");
+
+        if (!storedUser) {
+          setError("No logged-in user found");
+          setLoading(false);
+          // Redirect to login after 2 seconds
+          setTimeout(() => navigate("/login"), 2000);
+          return;
+        }
+
+        const user = JSON.parse(storedUser);
+
+        if (!user._id) {
+          setError("Invalid user data");
+          setLoading(false);
+          return;
+        }
+
+        // ✅ Fetch fresh customer data from API using helper function
+        const data = await getCustomerById(user._id);
         setCustomer(data);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (err: any) {
-        setError(err.message || "Unknown error");
+        console.error("Error fetching customer:", err);
+        setError(err.message || "Failed to load profile");
       } finally {
         setLoading(false);
       }
     };
 
     fetchCustomer();
-  }, []);
+  }, [navigate]);
 
-  if (loading)
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("customerId");
+    localStorage.removeItem("customerEmail");
+    navigate("/login");
+  };
+
+  if (loading) {
     return (
       <MainLayout>
         <div className="flex items-center justify-center min-h-[400px]">
@@ -67,20 +85,28 @@ export default function ProfilePage() {
         </div>
       </MainLayout>
     );
+  }
 
-  if (error)
+  if (error) {
     return (
       <MainLayout>
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="bg-red-50 border-2 border-red-200 rounded-xl p-8 max-w-md text-center">
             <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
-            <p className="text-red-600 text-lg font-semibold">{error}</p>
+            <p className="text-red-600 text-lg font-semibold mb-4">{error}</p>
+            <button
+              onClick={() => navigate("/login")}
+              className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition"
+            >
+              Go to Login
+            </button>
           </div>
         </div>
       </MainLayout>
     );
+  }
 
-  if (!customer)
+  if (!customer) {
     return (
       <MainLayout>
         <div className="flex items-center justify-center min-h-[400px]">
@@ -93,20 +119,30 @@ export default function ProfilePage() {
         </div>
       </MainLayout>
     );
+  }
 
   return (
     <MainLayout>
       <div className="max-w-4xl mx-auto">
         {/* Header Section */}
         <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-t-2xl p-8 text-white">
-          <div className="flex items-center space-x-4">
-            <div className="bg-white/20 backdrop-blur-sm p-4 rounded-full">
-              <User className="w-12 h-12" />
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="bg-white/20 backdrop-blur-sm p-4 rounded-full">
+                <User className="w-12 h-12" />
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold mb-1">My Profile</h1>
+                <p className="text-blue-100">Manage your account information</p>
+              </div>
             </div>
-            <div>
-              <h1 className="text-3xl font-bold mb-1">My Profile</h1>
-              <p className="text-blue-100">Manage your account information</p>
-            </div>
+            <button
+              onClick={handleLogout}
+              className="flex items-center space-x-2 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition"
+            >
+              <LogOut className="w-5 h-5" />
+              <span className="font-medium">Logout</span>
+            </button>
           </div>
         </div>
 
@@ -217,7 +253,6 @@ export default function ProfilePage() {
                   {customer._id}
                 </span>
               </p>
-
             </div>
           </div>
         </div>

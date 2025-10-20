@@ -20,8 +20,8 @@ export default function LoginPage() {
       // Get existing customer or create new one
       const customer = await getOrCreateCustomer(email, name || undefined);
 
-      // Save customer to localStorage
-      localStorage.setItem("customer", JSON.stringify(customer));
+      // Save customer to localStorage (using "user" key for consistency)
+      localStorage.setItem("user", JSON.stringify(customer));
       localStorage.setItem("customerId", customer._id);
       localStorage.setItem("customerEmail", customer.email);
 

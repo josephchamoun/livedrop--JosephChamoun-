@@ -2,13 +2,14 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import ProductCard from "./ProductCard";
+import type { Product } from "../../lib/api"; // 👈 import Product type
 
-const mockProduct = {
-  id: "1",
-  title: "Sample Product",
+const mockProduct: Product = {
+  _id: "1",
+  name: "Sample Product",
   price: 19.99,
-  stockQty: 5,
-  image: "https://via.placeholder.com/150",
+  stock: 5,
+  imageUrl: "https://via.placeholder.com/150",
   tags: ["New", "Sale"],
 };
 

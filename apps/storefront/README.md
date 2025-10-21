@@ -379,28 +379,13 @@ Edit `/src/assistant/ground-truth.json`:
   "answer": "Your answer here."
 }
 ```
+## 🚀 Live Demo
 
----
+- **Frontend (Vercel):** [https://livedrop-joseph-chamoun.vercel.app/](https://livedrop-joseph-chamoun.vercel.app/)
+- **Backend (Render):** [https://livedrop-josephchamoun.onrender.com](https://livedrop-josephchamoun.onrender.com)
 
-## 📚 Resources
 
-- [React Documentation](https://react.dev)
-- [Vite Guide](https://vitejs.dev/guide)
-- [Tailwind CSS](https://tailwindcss.com/docs)
-- [Zustand](https://github.com/pmndrs/zustand)
-- [Vitest](https://vitest.dev)
-- [React Router](https://reactrouter.com)
 
----
 
-## 📄 License
 
-MIT (for educational purposes)
 
----
-
-## 👨‍💻 Author
-
-Built as part of **Week 4 - Frontend at Lightspeed** assignment.
-
-**Deadline**: October 12, 2025 at 6 PM

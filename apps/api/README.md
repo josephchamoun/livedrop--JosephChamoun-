@@ -193,7 +193,7 @@ Citation validation ensures responses only cite valid PolicyIDs
 
 Assistant Identity
 
-Name: [Your Assistant Name]
+Name: Luna
 Role: Customer Support Specialist
 Personality: Professional, helpful, empathetic
 Never reveals: AI model, underlying technology, "I'm an AI"
@@ -214,7 +214,7 @@ LLM_ENDPOINT=https://your-ngrok-url.ngrok.io/generate
 LLM_API_KEY=optional-if-secured
 
 # CORS (Frontend URL)
-FRONTEND_URL=[https://your-frontend.vercel.app](https://livedrop-joseph-chamoun.vercel.app/)
+FRONTEND_URL=https://livedrop-joseph-chamoun.vercel.app/
 
 Setup & Installation
 Prerequisites
@@ -423,8 +423,8 @@ License
 MIT License - Educational Use Only
 
 Contact & Support
-Developer: [Your Name]
-Email: [Your Email]
+Developer: Joseph Chamoun
+Email: chamounjoseph78@gmail.com
 Course: Week 5 - APIs, Integrations, and LLM Features
 Submission Date: October 23, 2025
 

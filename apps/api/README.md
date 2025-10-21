@@ -434,3 +434,10 @@ MongoDB Atlas for free cloud database
 Render.com / Railway.app for free hosting
 Google Colab for LLM deployment
 Week 3 RAG system foundation
+
+
+
+## 🚀 Live Demo
+
+- **Frontend (Vercel):** [https://livedrop-joseph-chamoun.vercel.app/](https://livedrop-joseph-chamoun.vercel.app/)
+- **Backend (Render):** [https://livedrop-josephchamoun.onrender.com](https://livedrop-josephchamoun.onrender.com)

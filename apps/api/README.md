@@ -214,7 +214,7 @@ LLM_ENDPOINT=https://your-ngrok-url.ngrok.io/generate
 LLM_API_KEY=optional-if-secured
 
 # CORS (Frontend URL)
-FRONTEND_URL=https://your-frontend.vercel.app
+FRONTEND_URL=[https://your-frontend.vercel.app](https://livedrop-joseph-chamoun.vercel.app/)
 
 Setup & Installation
 Prerequisites
